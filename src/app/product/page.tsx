@@ -3,9 +3,10 @@ import BarChart from '@/components/Chart/BarChart';
 import { Card } from '@/components/ui/card';
 import { useActionGetChartProducts } from '@/services/products/products.function';
 import { IProduct } from '@/services/products/products.types';
+import { NextPage } from 'next';
 import Image from 'next/image';
 
-const Product = () => {
+const Product:NextPage = () => {
   const { data } = useActionGetChartProducts();
   const chartData = data?.data?.map((val: IProduct) => val?.amount);
   const chartLabel = data?.data?.map((val: IProduct) => val.name);

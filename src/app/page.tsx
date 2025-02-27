@@ -4,9 +4,10 @@ import { Card } from '@/components/ui/card';
 import { MONTHS } from '@/constants';
 import { useActionGetChartTransactions } from '@/services/transaction/transaction.function';
 import { formatRupiah } from '@/utils/format-rupiah';
+import { NextPage } from 'next';
 import Image from 'next/image';
 
-const Transaction = () => {
+const Transaction:NextPage = () => {
   const { data } = useActionGetChartTransactions();
   const totalTransaction =
     (data?.data && data?.data?.reduce((a, b) => a + b.amount, 0)) || 0;
