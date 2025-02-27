@@ -7,7 +7,7 @@ body {
 }
 
 .gradient-bg-sidebar {
-  background: linear-gradient(rgba(20, 136, 204, 1), rgba(43, 50, 178, 1));
+  background: linear-gradient(rgba(43, 50, 178, 1), rgba(20, 136, 204, 1));
 }
 
 @layer base {

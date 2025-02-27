@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getChartTransaction } from './transaction.api';
 import { ITransaction } from './transaction.types';
 
-export const useActionGetChartUser = () => {
+export const useActionGetChartTransactions = () => {
   return useQuery({
     queryKey: ['tranasactions'],
     queryFn: getChartTransaction,

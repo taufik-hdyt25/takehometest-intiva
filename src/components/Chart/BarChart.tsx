@@ -31,6 +31,7 @@ const BarChart: React.FC<IBarProps> = ({ type, categories, data, radius }) => {
   const options: ApexOptions = {
     chart: {
       type: 'line',
+      toolbar: {show:false}
     },
     stroke: {
       curve: 'straight',
@@ -41,9 +42,12 @@ const BarChart: React.FC<IBarProps> = ({ type, categories, data, radius }) => {
     plotOptions: {
       bar: {
         borderRadius: radius ? radius : 0,
-        columnWidth: 50,
+        columnWidth: 20,
       },
     },
+    dataLabels: {
+      enabled:false
+    }
   };
 
   const series = [

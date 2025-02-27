@@ -1,8 +1,8 @@
 import callAPI from '@/utils/fetcher';
 
-export const getChartBrand = async () => {
+export const getChartProducts = async () => {
   const response = await callAPI({
-    uri: '/brands',
+    uri: '/products',
     method: 'GET',
   });
   return response;

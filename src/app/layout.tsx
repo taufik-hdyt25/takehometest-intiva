@@ -20,11 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div className="grid grid-cols-[240px_1fr]">
-            <div className="h-screen overflow-y-auto gradient-bg-sidebar w-[240px] ">
+          <div>
+            <div className="gradient-bg-sidebar w-full fixed">
               <Sidebar />
             </div>
-            <div className="h-screen overflow-y-auto">{children}</div>
+            <div className="h-screen overflow-y-auto pt-[104px]">{children}</div>
           </div>
         </Providers>
       </body>

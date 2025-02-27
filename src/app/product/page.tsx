@@ -1,24 +1,30 @@
 'use client';
 import { BarChart } from '@/components/Chart';
 import { Card } from '@/components/ui/card';
-import { useActionGetChartBrands } from '@/services/brand/brand.function';
+import { useActionGetChartProducts } from '@/services/products/products.function';
+import { IProduct } from '@/services/products/products.types';
 import Image from 'next/image';
 
 const Product = () => {
-  const { data } = useActionGetChartBrands();
-
-  const chartData = data?.data?.map((val) => val.count_sold);
-  const chartLabel = data?.data?.map((val) => val.name);
+  const { data } = useActionGetChartProducts();
+  const chartData = data?.data?.map((val: IProduct) => val?.amount);
+  const chartLabel = data?.data?.map((val: IProduct) => val.name);
+  const totalItem = data?.data?.length || 0
 
   return (
-    <div className="mt-[20px] px-[20px]">
+    <div className="mt-[57px] px-[41px]">
       <div className="text-[28px] font-semibold">Product</div>
       <Card className="w-[299px] p-[16px] h-[107px] rounded-none flex flex-col justify-between mt-[24px]">
-        <div>Total Item</div>
+        <div>Total Items</div>
         <div className="flex items-center gap-[8px]">
-          <img src="./svg/ic-total-revenue.svg" alt="total" />
+          <Image
+            width={30}
+            height={30}
+            src="./svg/ic-total-revenue.svg"
+            alt="total"
+          />
           <span className="text-[24px] font-semibold">
-            {data?.data?.length || 0}
+            {totalItem}
           </span>
         </div>
       </Card>

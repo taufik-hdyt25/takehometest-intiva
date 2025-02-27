@@ -64,7 +64,7 @@ const callAPI = async ({
 
     return response.data;
   } catch (error) {
-    console.error('API call error:', error);
+    console.log('API call error:', error);
     throw error;
   }
 };

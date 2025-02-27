@@ -1,5 +1,5 @@
 export interface ITransaction {
-  id: number;
-  username: string;
-  count_transactions: number;
+  id:number
+  date: string
+  amount: number
 }
