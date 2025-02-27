@@ -1,5 +1,5 @@
 'use client';
-import { BarChart } from '@/components/Chart';
+import BarChart from '@/components/Chart/BarChart';
 import { Card } from '@/components/ui/card';
 import { MONTHS } from '@/constants';
 import { useActionGetChartTransactions } from '@/services/transaction/transaction.function';
@@ -12,8 +12,8 @@ const Transaction = () => {
     (data?.data && data?.data?.reduce((a, b) => a + b.amount, 0)) || 0;
 
   const chartData = data?.data?.map((val) => val.amount);
-  const transactions = data?.data?.length || 0
-  const mean = totalTransaction / transactions 
+  const transactions = data?.data?.length || 0;
+  const mean = totalTransaction / transactions;
 
   return (
     <div className="mt-[57px] px-[41px]">
@@ -49,7 +49,9 @@ const Transaction = () => {
         </Card>
       </div>
 
-      <BarChart data={chartData || []} categories={MONTHS} type="line" />
+      <div className='p-3 shadow-lg rounded-md'>
+        <BarChart data={chartData || []} categories={MONTHS} type="line" />
+      </div>
     </div>
   );
 };

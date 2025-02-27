@@ -1,5 +1,5 @@
 'use client';
-import { BarChart } from '@/components/Chart';
+import BarChart from '@/components/Chart/BarChart';
 import { Card } from '@/components/ui/card';
 import { useActionGetChartProducts } from '@/services/products/products.function';
 import { IProduct } from '@/services/products/products.types';
@@ -9,7 +9,7 @@ const Product = () => {
   const { data } = useActionGetChartProducts();
   const chartData = data?.data?.map((val: IProduct) => val?.amount);
   const chartLabel = data?.data?.map((val: IProduct) => val.name);
-  const totalItem = data?.data?.length || 0
+  const totalItem = data?.data?.length || 0;
 
   return (
     <div className="mt-[57px] px-[41px]">
@@ -23,18 +23,18 @@ const Product = () => {
             src="./svg/ic-total-revenue.svg"
             alt="total"
           />
-          <span className="text-[24px] font-semibold">
-            {totalItem}
-          </span>
+          <span className="text-[24px] font-semibold">{totalItem}</span>
         </div>
       </Card>
 
-      <BarChart
-        data={chartData || []}
-        categories={chartLabel || []}
-        type="bar"
-        radius={6}
-      />
+      <div className="p-3 shadow-lg rounded-md">
+        <BarChart
+          data={chartData || []}
+          categories={chartLabel || []}
+          type="bar"
+          radius={6}
+        />
+      </div>
     </div>
   );
 };
