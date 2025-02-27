@@ -1,10 +1,14 @@
 'use client';
-import BarChart from '@/components/Chart/BarChart';
 import { Card } from '@/components/ui/card';
 import { useActionGetChartProducts } from '@/services/products/products.function';
 import { IProduct } from '@/services/products/products.types';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+
+const BarChart = dynamic(() => import('@/components/Chart/BarChart'), {
+  ssr: false,
+});
 
 const Product:NextPage = () => {
   const { data } = useActionGetChartProducts();

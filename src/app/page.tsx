@@ -1,11 +1,15 @@
 'use client';
-import BarChart from '@/components/Chart/BarChart';
 import { Card } from '@/components/ui/card';
 import { MONTHS } from '@/constants';
 import { useActionGetChartTransactions } from '@/services/transaction/transaction.function';
 import { formatRupiah } from '@/utils/format-rupiah';
 import { NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
+
+const BarChart = dynamic(() => import('@/components/Chart/BarChart'), {
+  ssr: false,
+});
 
 const Transaction:NextPage = () => {
   const { data } = useActionGetChartTransactions();
