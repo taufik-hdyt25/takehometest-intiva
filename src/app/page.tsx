@@ -34,7 +34,7 @@ const Transaction:NextPage = () => {
               alt="total"
             />
             <span className="text-[16px] font-semibold">
-              {formatRupiah(totalTransaction)}
+              {formatRupiah(totalTransaction || 0)}
             </span>
           </div>
         </Card>
@@ -48,7 +48,7 @@ const Transaction:NextPage = () => {
               alt="total"
             />
             <span className="text-[16px] font-semibold">
-              {formatRupiah(mean)}
+              {formatRupiah(mean || 0)}
             </span>
           </div>
         </Card>
