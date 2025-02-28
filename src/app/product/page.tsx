@@ -1,5 +1,6 @@
 'use client';
 import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useActionGetChartProducts } from '@/services/products/products.function';
 import { IProduct } from '@/services/products/products.types';
 import { NextPage } from 'next';
@@ -10,8 +11,8 @@ const BarChart = dynamic(() => import('@/components/Chart/BarChart'), {
   ssr: false,
 });
 
-const Product:NextPage = () => {
-  const { data } = useActionGetChartProducts();
+const Product: NextPage = () => {
+  const { data, isLoading } = useActionGetChartProducts();
   const chartData = data?.data?.map((val: IProduct) => val?.amount);
   const chartLabel = data?.data?.map((val: IProduct) => val.name);
   const totalItem = data?.data?.length || 0;
@@ -32,14 +33,18 @@ const Product:NextPage = () => {
         </div>
       </Card>
 
-      <div className="p-3 shadow-lg rounded-md">
-        <BarChart
-          data={chartData || []}
-          categories={chartLabel || []}
-          type="bar"
-          radius={6}
-        />
-      </div>
+      {isLoading ? (
+        <Skeleton className="w-full h-[400px] rounded-lg mt-5" />
+      ) : (
+        <div className="p-3 shadow-lg rounded-md">
+          <BarChart
+            data={chartData || []}
+            categories={chartLabel || []}
+            type="bar"
+            radius={6}
+          />
+        </div>
+      )}
     </div>
   );
 };

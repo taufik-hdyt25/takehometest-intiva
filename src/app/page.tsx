@@ -1,5 +1,6 @@
 'use client';
 import { Card } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { MONTHS } from '@/constants';
 import { useActionGetChartTransactions } from '@/services/transaction/transaction.function';
 import { formatRupiah } from '@/utils/format-rupiah';
@@ -11,8 +12,8 @@ const BarChart = dynamic(() => import('@/components/Chart/BarChart'), {
   ssr: false,
 });
 
-const Transaction:NextPage = () => {
-  const { data } = useActionGetChartTransactions();
+const Transaction: NextPage = () => {
+  const { data, isLoading } = useActionGetChartTransactions();
   const totalTransaction =
     (data?.data && data?.data?.reduce((a, b) => a + b.amount, 0)) || 0;
 
@@ -54,9 +55,13 @@ const Transaction:NextPage = () => {
         </Card>
       </div>
 
-      <div className='p-3 shadow-lg rounded-md'>
-        <BarChart data={chartData || []} categories={MONTHS} type="line" />
-      </div>
+      {isLoading ? (
+        <Skeleton className="w-full h-[400px] rounded-lg mt-5" />
+      ) : (
+        <div className="p-3 shadow-lg rounded-md">
+          <BarChart data={chartData || []} categories={MONTHS} type="line" />
+        </div>
+      )}
     </div>
   );
 };
