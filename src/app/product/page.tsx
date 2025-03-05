@@ -2,7 +2,6 @@
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useActionGetChartProducts } from '@/services/products/products.function';
-import { IProduct } from '@/services/products/products.types';
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -13,10 +12,25 @@ const BarChart = dynamic(() => import('@/components/Chart/BarChart'), {
 
 const Product: NextPage = () => {
   const { data, isLoading } = useActionGetChartProducts();
-  const chartData = data?.data?.map((val: IProduct) => val?.amount);
-  const chartLabel = data?.data?.map((val: IProduct) => val.name);
-  const totalItem = data?.data?.length || 0;
+  const filterData = data?.data?.map((val)=> val?.id)
+  const uniqData = [...new Set(filterData)]
 
+
+  const result = uniqData?.map((val)=> {
+    const datas = data?.data?.filter((e)=> e.id === val)
+    const totalAmount = datas?.reduce((a,b)=> a + b.amount, 0)
+    return ({
+      name: datas?.at(0)?.name,
+      id: val,
+      amount: totalAmount
+    })
+  }) ?? []
+  
+  
+  const chartData: number[] = result?.map((val) => val?.amount ?? 0) ?? []
+  const chartLabel:string[] = result?.map((val) => val.name ?? "") ?? []
+  const totalItem = result?.reduce((a,b)=> a + (b?.amount ?? 0), 0)
+  
   return (
     <div className="mt-[57px] px-[41px]">
       <div className="text-[28px] font-semibold">Product</div>

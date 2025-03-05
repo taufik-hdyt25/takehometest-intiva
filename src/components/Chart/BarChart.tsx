@@ -23,7 +23,7 @@ type ChartType =
 interface IBarProps {
   type: ChartType;
   categories: string[] | null | undefined;
-  data: number[] | null | undefined;
+  data?: number[] | null | undefined;
   radius?: number;
 }
 
@@ -50,15 +50,15 @@ const BarChart: React.FC<IBarProps> = ({ type, categories, data, radius }) => {
     }
   };
 
-  const series = [
+  const datas = [
     {
       name: '',
       data: data || [],
     },
-  ];
+  ] 
   return (
     <div>
-      <Chart options={options} series={series} type={type} height={350} />
+      <Chart options={options} series={datas} type={type} height={350} />
     </div>
   );
 };
