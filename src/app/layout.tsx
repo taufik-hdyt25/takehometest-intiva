@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Providers from './providers';
-import Sidebar from '@/components/Sidebar';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,13 +20,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div>
-            <div className="gradient-bg-sidebar w-full fixed">
-              <Sidebar />
-            </div>
-            <div className="h-screen overflow-y-auto pt-[104px]">{children}</div>
-          </div>
+            <div>{children}</div>
         </Providers>
+        <Toaster />
       </body>
     </html>
   );

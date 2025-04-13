@@ -7,7 +7,7 @@ interface INAV {
 export const SIDENAVITEM: INAV[] = [
   {
     name: 'Transaction',
-    path: '/',
+    path: '/transaction',
     icon: './svg/ic-transaction.svg',
   },
   {
