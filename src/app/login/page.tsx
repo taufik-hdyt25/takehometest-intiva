@@ -21,6 +21,7 @@ type FormData = zod.infer<typeof schemaValidation>
 
 const LoginPage: NextPage = (): JSX.Element => {
     const [loading, setLoading] = useState(false)
+    const [loadingGoogle,setLoadingGoogle] = useState(false)
     const router = useRouter();
     const form = useForm({
         defaultValues: {
@@ -56,6 +57,17 @@ const LoginPage: NextPage = (): JSX.Element => {
             setLoading(false)
         }
     };
+
+    const signWithGoogle = async ()=> {
+        try {
+            setLoadingGoogle(true)
+            await signIn('google', { callbackUrl: '/' })
+            setLoadingGoogle(false)
+        } catch (error) {
+            setLoadingGoogle(false)
+            console.log(error);   
+        }
+    }
 
 
     return (
@@ -98,7 +110,7 @@ const LoginPage: NextPage = (): JSX.Element => {
 
 
 
-                <Button variant={"outline"} className="w-full mt-10" onClick={() => signIn('google', { callbackUrl: '/' })}>Sign With Google</Button>
+                <Button variant={"outline"} className="w-full mt-10" onClick={signWithGoogle}>{loadingGoogle ? <Loader2 className="animate-spin" /> : "Sign With Google"}</Button>
             </div>
         </div>
     )
