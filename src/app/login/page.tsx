@@ -5,9 +5,11 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { NextPage } from "next";
 import { signIn } from 'next-auth/react';
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import zod from "zod";
 
@@ -18,6 +20,7 @@ const schemaValidation = zod.object({
 type FormData = zod.infer<typeof schemaValidation>
 
 const LoginPage: NextPage = (): JSX.Element => {
+    const [loading, setLoading] = useState(false)
     const router = useRouter();
     const form = useForm({
         defaultValues: {
@@ -29,16 +32,18 @@ const LoginPage: NextPage = (): JSX.Element => {
 
     const handleSign: SubmitHandler<FormData> = async (data) => {
         try {
+            setLoading(true)
             const res = await signIn("credentials", {
                 ...data,
                 redirect: false,
                 callbackUrl: "/",
             });
             if (res && !res.error) {
+                setLoading(false)
                 router.push("/");
             } else {
                 console.log(res?.error);
-                
+                setLoading(false)
                 toast({
                     title: "Failed",
                     variant: "destructive",
@@ -48,6 +53,7 @@ const LoginPage: NextPage = (): JSX.Element => {
             }
         } catch (error) {
             console.error(error);
+            setLoading(false)
         }
     };
 
@@ -85,7 +91,7 @@ const LoginPage: NextPage = (): JSX.Element => {
                                     </FormItem>
                                 )}
                             />
-                        <Button className="w-full mt-5" type="submit" >Sign</Button>
+                            <Button className="w-full mt-5" type="submit" > {loading ? <Loader2 className="animate-spin" /> : "Sign"}</Button>
                         </form>
                     </Form>
                 </div>

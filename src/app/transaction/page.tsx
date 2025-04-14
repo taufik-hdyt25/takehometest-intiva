@@ -14,6 +14,7 @@ const BarChart = dynamic(() => import('@/components/Chart/BarChart'), {
 
 const TransactionPage: NextPage = () => {
     const { data, isLoading } = useActionGetChartTransactions();
+
     const totalTransaction =
         (data?.data && data?.data?.reduce((a, b) => a + b.amount, 0)) || 0;
 
