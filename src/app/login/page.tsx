@@ -39,12 +39,11 @@ const LoginPage: NextPage = (): JSX.Element => {
                 redirect: false,
                 callbackUrl: "/",
             });
+            setLoading(false)
             if (res && !res.error) {
-                setLoading(false)
                 router.push("/");
             } else {
                 console.log(res?.error);
-                setLoading(false)
                 toast({
                     title: "Failed",
                     variant: "destructive",
